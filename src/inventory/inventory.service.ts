@@ -5,7 +5,7 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId } from 'mongoose';
+import { Model, ObjectId, Schema } from 'mongoose';
 import {
   CreateInventoryDto,
   InventoryQueryDto,
@@ -62,6 +62,20 @@ export class InventoryService {
         count,
         data,
       };
+    } catch (error) {
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
+  async findOne(id: Schema.Types.ObjectId) {
+    try {
+      const inventory = await this.inventoryModel.findById(id).exec();
+
+      if (!inventory) {
+        throw new NotFoundException('Inventory Not Found');
+      }
+
+      return inventory;
     } catch (error) {
       throw new HttpException(error.message, error.status);
     }

@@ -5,5 +5,14 @@ import { Document } from 'mongoose';
 export class Inventory extends Document {
   @Prop({ required: true })
   name: string;
+
+  @Prop({ required: true })
+  price: number;
+
+  @Prop({ required: true })
+  quantityType: string;
+
+  @Prop({ required: true })
+  quantity: number;
 }
 export const InventorySchema = SchemaFactory.createForClass(Inventory);

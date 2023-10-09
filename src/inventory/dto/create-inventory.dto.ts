@@ -1,11 +1,23 @@
 import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateInventoryDto {
   @IsNotEmpty()
   @IsString()
   @Transform(({ value }) => value.trim())
   name: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  price: number;
+
+  @IsNotEmpty()
+  @IsString()
+  quantityType: string;
+
+  @IsNotEmpty()
+  @IsString()
+  quantity: number;
 }
 
 export class InventoryQueryDto {

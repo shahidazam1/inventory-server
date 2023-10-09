@@ -30,6 +30,11 @@ export class InventoryController {
     return this.inventoryService.findAll(query);
   }
 
+  @Get()
+  findOne(@Param('id') id: ObjectId) {
+    return this.inventoryService.findOne(id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: ObjectId,
